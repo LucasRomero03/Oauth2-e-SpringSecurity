@@ -3,6 +3,7 @@ package com.devsuperior.demo.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	@Autowired PasswordEncoder passwordEncoder;
 	
 	@Transactional(readOnly = true)
 	public ProductDTO findById(Long id) {
@@ -30,7 +32,7 @@ public class ProductService {
 	@Transactional
 	public ProductDTO insert(ProductDTO dto) {
 		Product entity = new Product();
-		entity.setName(dto.getName());
+		entity.setName(passwordEncoder.encode(dto.getName()) );
 		entity = productRepository.save(entity);
 		return new ProductDTO(entity);
 	}
