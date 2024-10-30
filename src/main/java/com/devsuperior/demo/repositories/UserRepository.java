@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.devsuperior.demo.Projections.UserDetailsProjection;
+import com.devsuperior.demo.dto.UserDetailsDTO;
 import com.devsuperior.demo.entities.User;
 
 @Repository
-public interface UserReposiroty extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
   User findByEmail(String email);
 
@@ -22,5 +23,15 @@ public interface UserReposiroty extends JpaRepository<User, Long> {
           WHERE tb_user.email = :email
       """)
   List<UserDetailsProjection> searchUserAndRolesByEmail(String email);
+
+  @Query(value = "SELECT new com.devsuperior.demo.dto.UserDetailsDTO(u.email, u.password, r.id, r.authority) " +
+      "FROM User u JOIN  u.roles r")
+  List<UserDetailsDTO> searchUserAndRolesByEmail1();
+
+  // sem usar alias
+  //@Query(value = "SELECT new com.devsuperior.demo.dto.UserDetailsDTO(User.email, User.password, Role.id, Role.authority) "
+    //  +
+      //"FROM User JOIN User.roles Role")
+  //List<UserDetailsDTO> searchUserAndRolesByEmail1();
 
 }

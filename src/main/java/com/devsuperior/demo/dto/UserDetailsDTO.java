@@ -1,6 +1,5 @@
 package com.devsuperior.demo.dto;
 
-import com.devsuperior.demo.entities.User;
 //esta parado pois iria tentar fazer sem usar o sql raiz quando puder testar voce faz, por enquanto nao teste vai perder tempo
 public class UserDetailsDTO {
 
@@ -19,13 +18,7 @@ public class UserDetailsDTO {
     this.roleId = roleId;
     this.authority = authority;
   }
-  public UserDetailsDTO(User user){
-    userName = user.getUsername();
-    password = user.getPassword();
-    
-
-
-  }
+ 
 
   public UserDetailsDTO() {
   }
@@ -41,6 +34,13 @@ public class UserDetailsDTO {
   }
   public String getUserName() {
     return userName;
+  }
+
+
+  @Override
+  public String toString() {
+    return "UserDetailsDTO [userName=" + userName + ", password=" + password + ", roleId=" + roleId + ", authority="
+        + authority + "]";
   }
 
 
