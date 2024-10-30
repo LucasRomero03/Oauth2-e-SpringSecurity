@@ -24,9 +24,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
       """)
   List<UserDetailsProjection> searchUserAndRolesByEmail(String email);
 
-  @Query(value = "SELECT new com.devsuperior.demo.dto.UserDetailsDTO(u.email, u.password, r.id, r.authority) " +
-      "FROM User u JOIN  u.roles r")
-  List<UserDetailsDTO> searchUserAndRolesByEmail1();
+  @Query(value = " SELECT new com.devsuperior.demo.dto.UserDetailsDTO(u.email, u.password, r.id, r.authority) " +
+      " FROM User u JOIN  u.roles r" +" WHERE u.email= :email")
+  List<UserDetailsDTO> searchUserAndRolesByEmail1(String email);
 
   // sem usar alias
   //@Query(value = "SELECT new com.devsuperior.demo.dto.UserDetailsDTO(User.email, User.password, Role.id, Role.authority) "
