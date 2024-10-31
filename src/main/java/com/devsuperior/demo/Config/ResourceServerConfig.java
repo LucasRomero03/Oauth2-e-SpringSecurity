@@ -41,7 +41,7 @@ public class ResourceServerConfig {
 	}
 
 	@Bean
-	@Order(3)
+	@Order(2)
 	public SecurityFilterChain rsSecurityFilterChain(HttpSecurity http) throws Exception {
 
 		http.csrf(csrf -> csrf.disable());

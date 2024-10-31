@@ -32,7 +32,8 @@ public class ProductService {
 	@Transactional
 	public ProductDTO insert(ProductDTO dto) {
 		Product entity = new Product();
-		entity.setName(passwordEncoder.encode(dto.getName()) );
+		entity.setName(dto.getName() );
+		//entity.setName(passwordEncoder.encode(dto.getName()) );
 		entity = productRepository.save(entity);
 		return new ProductDTO(entity);
 	}

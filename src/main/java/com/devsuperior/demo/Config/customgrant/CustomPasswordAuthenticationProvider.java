@@ -43,6 +43,7 @@ public class CustomPasswordAuthenticationProvider implements AuthenticationProvi
 	private String password = "";
 	private Set<String> authorizedScopes = new HashSet<>();
 
+	
 	public CustomPasswordAuthenticationProvider(OAuth2AuthorizationService authorizationService,
 			OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator, 
 			UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {

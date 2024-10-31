@@ -81,7 +81,7 @@ public class AuthorizationServerConfig {
 
 		http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
 		// @formatter:on
-
+		System.out.println(clientId.trim()+clientSecret);
 		return http.build();
 	}
 
@@ -94,7 +94,7 @@ public class AuthorizationServerConfig {
 	public OAuth2AuthorizationConsentService oAuth2AuthorizationConsentService() {
 		return new InMemoryOAuth2AuthorizationConsentService();
 	}
-
+	// ja ajuda a fazer a codificação e decodificação entra de forma integrada para validar a senha criptografada 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -105,8 +105,8 @@ public class AuthorizationServerConfig {
 		// @formatter:off
 		RegisteredClient registeredClient = RegisteredClient
 			.withId(UUID.randomUUID().toString())
-			.clientId(clientId)
-			.clientSecret(passwordEncoder().encode(clientSecret))
+			.clientId(clientId.trim())
+			.clientSecret(passwordEncoder().encode(clientSecret.trim()))
 			.scope("read")
 			.scope("write")
 			.authorizationGrantType(new AuthorizationGrantType("password"))
@@ -114,6 +114,7 @@ public class AuthorizationServerConfig {
 			.clientSettings(clientSettings())
 			.build();
 		// @formatter:on
+		
 
 		return new InMemoryRegisteredClientRepository(registeredClient);
 	}
