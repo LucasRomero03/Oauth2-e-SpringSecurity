@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.devsuperior.demo.Projections.UserDetailsProjection;
+import com.devsuperior.demo.dto.UserDetailsDTO;
 import com.devsuperior.demo.entities.Role;
 import com.devsuperior.demo.entities.User;
 import com.devsuperior.demo.repositories.UserRepository;
@@ -22,15 +23,16 @@ public class UserService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     List<UserDetailsProjection> result = userRepository.searchUserAndRolesByEmail(username);
-
-    if (result.size()==0) {
+    List<UserDetailsDTO> result1 = userRepository.searchUserAndRolesByEmail1(username);
+    
+    if (result1.size()==0) {
       throw new UsernameNotFoundException("user not found");
     }
 
     User user = new User();
     user.setEmail(username);
     user.setPassword(result.get(0).getPassword());
-    for (UserDetailsProjection projection : result) {
+    for (UserDetailsDTO projection : result1) {
         user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
     }
 

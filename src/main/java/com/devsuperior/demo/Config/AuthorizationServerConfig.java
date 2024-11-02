@@ -67,6 +67,7 @@ public class AuthorizationServerConfig {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+
 	@Bean
 	@Order(2)
 	public SecurityFilterChain asSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -81,7 +82,7 @@ public class AuthorizationServerConfig {
 
 		http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
 		// @formatter:on
-		System.out.println(clientId.trim()+clientSecret);
+		System.out.println(clientId+"mero"+clientSecret);
 		return http.build();
 	}
 
@@ -157,6 +158,7 @@ public class AuthorizationServerConfig {
 			if (context.getTokenType().getValue().equals("access_token")) {
 				// @formatter:off
 				context.getClaims()
+					.claim("name", "meroshow esteve aqui " ) // teste para mostrar que tem como colocar mais coisas 
 					.claim("authorities", authorities)
 					.claim("username", user.getUsername());
 				// @formatter:on

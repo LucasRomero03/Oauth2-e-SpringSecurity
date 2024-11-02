@@ -20,8 +20,8 @@ public class DemoApplication  implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		//System.out.println(userService.loadUserByUsername("maria@gmail.com"));
-//System.out.println(userRepository.searchUserAndRolesByEmail1("alex@gmail.com"));
+		System.out.println(userService.loadUserByUsername("maria@gmail.com"));
+System.out.println(userRepository.searchUserAndRolesByEmail1("alex@gmail.com"));
 	}
 
 
